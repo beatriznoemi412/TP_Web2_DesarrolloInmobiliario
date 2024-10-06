@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-10-2024 a las 16:07:08
+-- Tiempo de generación: 04-10-2024 a las 23:44:15
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -33,18 +33,21 @@ CREATE TABLE `vendedores` (
   `Apellido` varchar(50) NOT NULL,
   `Telefono` varchar(70) NOT NULL,
   `Email` varchar(50) NOT NULL,
-  `Calificacion` int(11) NOT NULL
+  `Calificacion` int(11) NOT NULL,
+  `usuario` varchar(50) NOT NULL,
+  `contraseña` varchar(255) NOT NULL,
+  `es_admin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `vendedores`
 --
 
-INSERT INTO `vendedores` (`Id_vendedor`, `Nombre`, `Apellido`, `Telefono`, `Email`, `Calificacion`) VALUES
-(1, 'Agustín', 'Castro', '2494678635', 'agustinC@gmail.com', 0),
-(2, 'Pamela ', 'Sosa', '2494582311', 'pamsosa@gmail.com', 0),
-(3, 'Juan', 'Arce', '2494985634', 'ja@gmail.com', 0),
-(4, 'Carmen', 'Lopez', '2494123122', 'carmenlo@gmail.com', 0);
+INSERT INTO `vendedores` (`Id_vendedor`, `Nombre`, `Apellido`, `Telefono`, `Email`, `Calificacion`, `usuario`, `contraseña`, `es_admin`) VALUES
+(1, 'Agustín', 'Castro', '2494678635', 'agustinC@gmail.com', 0, '', '', 0),
+(2, 'Pamela ', 'Sosa', '2494582311', 'pamsosa@gmail.com', 0, '', '', 0),
+(3, 'Juan', 'Arce', '2494985634', 'ja@gmail.com', 0, '', '', 0),
+(4, 'Carmen', 'Lopez', '2494123122', 'carmenlo@gmail.com', 0, '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -54,21 +57,22 @@ INSERT INTO `vendedores` (`Id_vendedor`, `Nombre`, `Apellido`, `Telefono`, `Emai
 
 CREATE TABLE `venta` (
   `id_venta` int(11) NOT NULL,
-  `inmueble` varchar(100) NOT NULL,
+  `inmueble` varchar(300) NOT NULL,
   `fecha_venta` date NOT NULL,
   `precio` int(11) NOT NULL,
-  `Id_vendedor` int(11) NOT NULL
+  `Id_vendedor` int(11) NOT NULL,
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `venta`
 --
 
-INSERT INTO `venta` (`id_venta`, `inmueble`, `fecha_venta`, `precio`, `Id_vendedor`) VALUES
-(1, 'Casa de lujo en el  Lago del Fuerte.', '2024-09-11', 550000, 2),
-(2, 'nueva casa en la sierra', '2024-10-01', 300000, 4),
-(3, 'cabaña cercana al lago, entre sierras', '2024-10-01', 200000, 2),
-(4, 'casa céntrica, inmejorables terminaciones', '2024-10-01', 350000, 1);
+INSERT INTO `venta` (`id_venta`, `inmueble`, `fecha_venta`, `precio`, `Id_vendedor`, `imagen_url`) VALUES
+(1, 'Casa de lujo en el  Lago del Fuerte.', '2024-09-11', 550000, 2, NULL),
+(2, 'nueva casa en la sierra', '2024-10-01', 300000, 4, NULL),
+(3, 'cabaña cercana al lago, entre sierras', '2024-10-01', 200000, 2, NULL),
+(4, 'casa céntrica, inmejorables terminaciones', '2024-10-01', 350000, 1, NULL);
 
 --
 -- Índices para tablas volcadas

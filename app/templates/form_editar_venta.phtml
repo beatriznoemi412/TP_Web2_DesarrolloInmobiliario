@@ -1,0 +1,23 @@
+<?php require_once 'app/templates/layout/header.phtml'; ?>
+<div class="container mt-5">
+    <h1 class="text-center">Editar Venta</h1>
+    <form method="POST" action="">
+        <input type="hidden" name="id" value="<?= htmlspecialchars($sale->id) ?>">
+        <div class="mb-3">
+            <label for="inmueble" class="form-label">Inmueble</label>
+            <input type="text" class="form-control" name="inmueble" id="inmueble" value="<?= htmlspecialchars($sale->inmueble) ?>" required>
+        </div>
+        <div class="mb-3">
+            <label for="date" class="form-label">Fecha de Venta</label>
+            <input type="date" class="form-control" name="date" id="date" value="<?= htmlspecialchars($sale->fecha_venta) ?>" required>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Precio</label>
+            <input type="number" class="form-control" name="price" id="price" value="<?= htmlspecialchars($sale->precio) ?>" required>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Actualizar Venta</button>
+            <a href="<?= BASE_URL . 'listarVenta' ?>" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>

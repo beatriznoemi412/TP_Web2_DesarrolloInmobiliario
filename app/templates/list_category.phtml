@@ -1,0 +1,32 @@
+<?php require_once 'app/templates/layout/header.phtml'; ?>
+
+<div class="container my-4">
+    <h1 class="text-light text-center mb-4">Listado de Categorías por Precio</h1>
+
+    <?php if (!empty($categories)): ?>
+        <div class="card">
+            <div class="card-body">
+                <p class="text-light">Haz clic en cada categoría para ver los detalles.</p> <!-- Clear instruction for the user -->
+                <ul class="list-group">
+                    <?php foreach ($categories as $category): ?>
+                        <li class="list-group-item bg-dark text-light">
+                            <a href="<?= BASE_URL . 'categoriaItem/' . $category->categoria ?>" class="text-decoration-none text-light">
+                                <strong>Categoría:</strong> <?= $category->categoria ?> <br>
+                                <strong>Cantidad:</strong> <?= $category->cantidad ?> <br>
+                                <strong>Rango de Precio:</strong> <?= $category->min_precio ?> a <?= $category->max_precio ?>
+                                <!-- Optional: Add a badge or icon here to indicate clickability -->
+                                <span class="badge bg-primary float-end">Ver Detalles</span>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    <?php else: ?>
+        <div class="alert alert-warning text-center mt-4">
+            No hay categorías disponibles.
+        </div>
+    <?php endif; ?>
+</div>
+
+<?php require_once 'app/templates/layout/footer.phtml'; ?>

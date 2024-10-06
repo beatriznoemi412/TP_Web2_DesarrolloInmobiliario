@@ -1,0 +1,67 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(1, 10, 10);
+    display: flex;
+    flex-direction: column;
+}
+body{
+    min-height: 100vh; /* La altura mínima del body será de toda la ventana */
+    display: flex;
+    flex-direction: column;
+}
+header{
+    background: black;
+}
+header nav{
+    background-image: url('../images/building.jpg');
+    background-position: center; 
+    width: 100%;
+    object-fit: cover;
+    height: 50vh;
+}
+.navbar-brand{
+    font-size: 2rem;
+    padding-left: 30px;
+    padding-right: 34px; 
+    color: rgb(84, 146, 153);
+}
+    
+.navbar-nav {
+        margin-right: 60px; /* Añade margen a la derecha de los enlaces */
+}
+
+.nav-link{
+    font-size: 1rem;
+    border-radius: 0.25rem; /* Ajusta el valor según lo redondeado que desees */
+    transition: background-color 0.3s, color 0.3s; /* Suaviza el efecto de cambio */
+    color: rgb(84, 146, 153);
+}
+   
+.nav-link:hover {
+    background-color:rgb(46, 85, 91); /* Cambia el color de fondo al pasar el mouse */
+    color: white; /* Cambia el color del texto al pasar el mouse */
+}
+.nav-link.active {
+    color: white; /* Cambia el color del texto a blanco */
+}
+/*HOME.PHTML*/
+.icono{
+    text-align: center;
+}
+.iconos{
+    width: 75px;
+    height: auto;
+}
+
+/*FOOTER*/
+footer{
+    background-color: rgb(218, 241, 243);
+    color:  rgb(84, 146, 153);
+    padding: 10px 0; /* Espaciado interno */
+    text-align: center;
+    position: relative;/* Relativo al flujo normal de la página */
+    width: 100%; /* Ocupa todo el ancho */
+    bottom: 0;
+}

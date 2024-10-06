@@ -1,0 +1,18 @@
+<form action="<?= BASE_URL ?>/nueva" method="POST" class="bg-dark p-4 rounded">
+    <div class="mb-2">
+        <label for="inmueble" class="form-label text-light">Inmueble</label>
+        <input type="text" name="inmueble" id="inmueble" class="form-control" required>
+    </div>
+
+    <div class="mb-2">
+        <label for="date" class="form-label text-light">Fecha</label>
+        <input type="date" name="date" id="date" class="form-control" required>
+    </div>
+
+    <div class="mb-2">
+        <label for="price" class="form-label text-light">Precio</label>
+        <input type="number" name="price" id="price" class="form-control" step="0.01" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Agregar Venta</button>
+</form>

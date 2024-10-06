@@ -1,0 +1,28 @@
+<?php require_once 'app/templates/layout/header.phtml'; ?>
+
+<?php if (isset($seller)): ?>
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="text-center text-light">Detalles del Vendedor</h1>
+                <ul class="list-group">
+                    <li class="list-group-item bg-dark text-light">Nombre: <?= $seller->Nombre ?></li>
+                    <li class="list-group-item bg-dark text-light">Apellido: <?= $seller->Apellido ?></li>
+                    <li class="list-group-item bg-dark text-light">Teléfono: <?= $seller->Telefono ?></li>
+                    <li class="list-group-item bg-dark text-light">Email: <?= $seller->Email ?></li>
+                    <li class="list-group-item bg-dark text-light">Calificación: <?= $seller->Calificacion ?></li>
+                </ul>
+
+                <br>
+                <a href="<?= 'listar/'; ?>" class="btn btn-primary">Volver a la lista</a>
+            </div>
+        </div>
+    </div>
+<?php else: ?>
+    <div class="container">
+        <h2 class="text-light">No se encontró información del vendedor.</h2>
+        <a href="<?= 'listar/'; ?>" class="btn btn-primary">Volver a la lista</a>
+    </div>
+<?php endif; ?>
+
+<?php require_once 'app/templates/layout/header.phtml'; ?>
