@@ -54,7 +54,11 @@ header nav{
     width: 75px;
     height: auto;
 }
-
+/*form_editar y form_agregar_venta.phtml*/
+.imagen{
+    width: 50%;
+    height: auto;
+}
 /*FOOTER*/
 footer{
     background-color: rgb(218, 241, 243);

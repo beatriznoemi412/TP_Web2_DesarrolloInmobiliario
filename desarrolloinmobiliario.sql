@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-10-2024 a las 23:44:15
+-- Tiempo de generación: 11-10-2024 a las 03:45:57
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -28,26 +28,25 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `vendedores` (
-  `Id_vendedor` int(11) NOT NULL,
+  `id_vendedor` int(11) NOT NULL,
   `Nombre` varchar(50) NOT NULL,
   `Apellido` varchar(50) NOT NULL,
   `Telefono` varchar(70) NOT NULL,
   `Email` varchar(50) NOT NULL,
-  `Calificacion` int(11) NOT NULL,
   `usuario` varchar(50) NOT NULL,
-  `contraseña` varchar(255) NOT NULL,
-  `es_admin` tinyint(1) NOT NULL
+  `password` char(150) NOT NULL,
+  `rol` enum('admin','vendedor') NOT NULL DEFAULT 'vendedor'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `vendedores`
 --
 
-INSERT INTO `vendedores` (`Id_vendedor`, `Nombre`, `Apellido`, `Telefono`, `Email`, `Calificacion`, `usuario`, `contraseña`, `es_admin`) VALUES
-(1, 'Agustín', 'Castro', '2494678635', 'agustinC@gmail.com', 0, '', '', 0),
-(2, 'Pamela ', 'Sosa', '2494582311', 'pamsosa@gmail.com', 0, '', '', 0),
-(3, 'Juan', 'Arce', '2494985634', 'ja@gmail.com', 0, '', '', 0),
-(4, 'Carmen', 'Lopez', '2494123122', 'carmenlo@gmail.com', 0, '', '', 0);
+INSERT INTO `vendedores` (`id_vendedor`, `Nombre`, `Apellido`, `Telefono`, `Email`, `usuario`, `password`, `rol`) VALUES
+(1, 'Agustín', 'Castro', '2494678635', 'agustinC@gmail.com', 'webadmin', '$2a$12$mvhk0vIlA2p3LU.cQw/OxOrWxQFOk71l0Eq8I94pvcQTF5Z32icBu', 'admin'),
+(2, 'Pamela ', 'Sosa', '2494582311', 'pamsosa@gmail.com', '', '', 'vendedor'),
+(3, 'Juan', 'Arce', '2494985634', 'ja@gmail.com', '', '', 'vendedor'),
+(4, 'Carmen', 'Lopez', '2494123122', 'carmenlo@gmail.com', '', '', 'vendedor');
 
 -- --------------------------------------------------------
 
@@ -61,18 +60,17 @@ CREATE TABLE `venta` (
   `fecha_venta` date NOT NULL,
   `precio` int(11) NOT NULL,
   `Id_vendedor` int(11) NOT NULL,
-
+  `foto_url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `venta`
 --
 
-INSERT INTO `venta` (`id_venta`, `inmueble`, `fecha_venta`, `precio`, `Id_vendedor`, `imagen_url`) VALUES
-(1, 'Casa de lujo en el  Lago del Fuerte.', '2024-09-11', 550000, 2, NULL),
-(2, 'nueva casa en la sierra', '2024-10-01', 300000, 4, NULL),
-(3, 'cabaña cercana al lago, entre sierras', '2024-10-01', 200000, 2, NULL),
-(4, 'casa céntrica, inmejorables terminaciones', '2024-10-01', 350000, 1, NULL);
+INSERT INTO `venta` (`id_venta`, `inmueble`, `fecha_venta`, `precio`, `id_vendedor`, `foto_url`) VALUES
+(31, 'Lujosa casa en country golf', '2024-08-07', 525000, 1, 'https://cdn.pixabay.com/photo/2016/08/16/03/50/exterior-1597098_1280.jpg'),
+(34, 'Departamento en pleno centro Tandil', '2024-08-13', 220000, 3, 'https://cdn.pixabay.com/photo/2014/09/04/05/54/construction-435302_1280.jpg'),
+(35, 'Casa importante cerca del lago de Tandil', '2024-08-23', 480000, 2, 'https://cdn.pixabay.com/photo/2013/09/24/12/08/apartment-185779_1280.jpg');
 
 --
 -- Índices para tablas volcadas
@@ -82,14 +80,15 @@ INSERT INTO `venta` (`id_venta`, `inmueble`, `fecha_venta`, `precio`, `Id_vended
 -- Indices de la tabla `vendedores`
 --
 ALTER TABLE `vendedores`
-  ADD PRIMARY KEY (`Id_vendedor`);
+  ADD PRIMARY KEY (`id_vendedor`),
+  ADD UNIQUE KEY `Email` (`Email`);
 
 --
 -- Indices de la tabla `venta`
 --
 ALTER TABLE `venta`
   ADD UNIQUE KEY `id_venta` (`id_venta`),
-  ADD KEY `Id_vendedor` (`Id_vendedor`);
+  ADD KEY `id_vendedor` (`id_vendedor`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -105,7 +104,7 @@ ALTER TABLE `vendedores`
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Restricciones para tablas volcadas

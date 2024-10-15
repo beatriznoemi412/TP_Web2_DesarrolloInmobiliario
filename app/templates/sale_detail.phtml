@@ -1,26 +1,33 @@
 <?php require_once 'app/templates/layout/header.phtml'; ?>
 
 <?php if (isset($sale)): ?>
-    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h1 class="text-center text-light">Detalles de la Venta</h1>
-                <ul class="list-group">
-                    <li class="list-group-item bg-dark text-light">Inmueble: <?= $sale->inmueble ?></li>
-                    <li class="list-group-item bg-dark text-light">Fecha de Venta <?= $sale->fecha_venta ?></li>
-                    <li class="list-group-item bg-dark text-light">Precio: <?= $sale->precio ?></li>
-                </ul>
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="text-center text-light">Detalles de la Venta</h1>
+            <ul class="detail list-group">
+                <li class="list-group-item bg-dark text-light">Inmueble: <?= $sale->inmueble ?></li>
+                <li class="list-group-item bg-dark text-light">Fecha de Venta: <?= $sale->fecha_venta ?></li>
+                <li class="list-group-item bg-dark text-light">Precio: <?= $sale->precio ?></li>
+                <li class="list-group-item bg-dark text-light">Asesor: <?= $sale->Id_vendedor ?></li>
 
-                <br>
-                <a href="<?= 'listarVenta/'; ?>" class="btn btn-primary">Volver a Ventas</a>
-            </div>
+                <!-- Mostrar la imagen en lugar de la URL -->
+                <li class="list-group-item bg-dark text-light">
+                    Imagen: <br>
+                    <img class="imagen" src="<?= $sale->foto_url ?>" alt="Imagen del inmueble">
+                </li>
+            </ul>
+
+            <br>
+            <a href="<?= 'listarVenta/'; ?>" class="btn btn-primary">Volver a Ventas</a>
         </div>
     </div>
+</div>
 <?php else: ?>
-    <div class="container">
-        <h2 class="text-light">No se encontró información de la venta.</h2>
-        <a href="<?= 'listarVenta/';?>" class="btn btn-primary">Volver a Ventas</a>
-    </div>
+<div class="container">
+    <h2 class="text-light">No se encontró información de la venta.</h2>
+    <a href="<?= 'listarVenta/';?>" class="btn btn-primary">Volver a Ventas</a>
+</div>
 <?php endif; ?>
 
-<?php require_once 'app/templates/layout/header.phtml'; ?>
+<?php require_once 'app/templates/layout/footer.phtml'; ?>

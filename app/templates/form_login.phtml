@@ -1,0 +1,23 @@
+<?php require_once 'app/templates/layout/header.phtml' ?>
+
+<?php if ($error): ?>
+<div class='alert alert-danger' role='alert'>
+    <?= $error ?>
+</div>
+<?php endif ?>
+
+<div class="container mt-5">
+    <form method='post' action='login'>
+        <div class='form-group'>
+            <label class="text-light" for='usuario'>Usuario</label>
+            <input type='usuario' class='form-control' id='usuario' name='usuario' required>
+        </div>
+        <div class='form-group'>
+            <label class="text-light" for='password'>Password</label>
+            <input type='password' class='form-control' id='password' name='password' required>
+        </div>
+        <button type='submit' class='btn btn-primary'>Login</button>
+    </form>
+</div>
+
+<?php require_once 'app/templates/layout/footer.phtml' ?>

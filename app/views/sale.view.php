@@ -1,14 +1,13 @@
 <?php
 
 class SaleView {
+
     public function showSales($sales) {
         // la vista define una nueva variable con la cantida de vendedores
         $count = count($sales);
 
-        // NOTA: el template va a poder acceder a todas las variables y constantes que tienen alcance en esta funcion
+        // el template va a poder acceder a todas las variables y constantes que tienen alcance en esta funcion
         require_once 'app/templates/list_sale.phtml';
-
-        
     }
     public function showSaleById($sale){
     
@@ -19,6 +18,14 @@ class SaleView {
     }
     public function showEditSaleForm($sale) {
         require 'app/templates/form_editar_venta.phtml'; 
+    }
+
+    public function showAddSaleForm($sellers) {
+        require 'app/templates/form_agregar_venta.phtml'; 
+    }
+
+    public function showSuccess($message) {
+        echo "<div class='success'>{$message}</div>";
     }
 
 }

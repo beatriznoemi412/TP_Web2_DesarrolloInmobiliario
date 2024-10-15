@@ -1,0 +1,35 @@
+<?php require_once 'app/templates/layout/header.phtml'; ?>
+<div class="container mt-5">
+    <h1 class="text-center text-light">Editar Info Asesores</h1>
+    <form method="POST" action="editarVendedor/<?= htmlspecialchars($seller->Id_vendedor) ?>">
+
+        <div class="mb-3">
+            <label for="name" class="form-label text-light">Nombre</label>
+            <input type="text" class="form-control" name="name" id="name"
+                value="<?= htmlspecialchars($seller->Nombre) ?>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="firstName" class="form-label text-light">Apellido</label>
+            <input type="text" class="form-control" name="firstName" id="firstName"
+                value="<?= htmlspecialchars($seller->Apellido) ?>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="telephone" class="form-label text-light">Teléfono</label>
+            <input type="text" class="form-control" name="telephone" id="telephone"
+                value="<?= htmlspecialchars($seller->Telefono) ?>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label text-light">Email</label>
+            <input type="email" class="form-control" name="email" id="email"
+                value="<?= htmlspecialchars($seller->Email) ?>" required>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary text-light">Actualizar Datos Asesor</button>
+            <a href="<?= BASE_URL . 'listar' ?>" class="btn btn-secondary text-light">Cancelar</a>
+        </div>
+    </form>
+</div>

@@ -7,7 +7,7 @@ class HomeModel {
     }
     // Método para obtener información relevante para la página de inicio
     public function getHomeData() {
-        // Puedes modificar la consulta según tus necesidades
+    
         $query = $this->db->prepare('SELECT * FROM venta LIMIT 3'); // Ejemplo: obtener las 3 propiedades más recientes
         $query->execute();
         

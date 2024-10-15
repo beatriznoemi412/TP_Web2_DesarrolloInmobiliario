@@ -1,0 +1,40 @@
+<?php
+// Verificar si la sesión está iniciada
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Verificar si el usuario tiene el rol de administrador
+$current_user_role = $_SESSION['ROL_VENDEDOR'] ?? null;
+
+if ($current_user_role === 'admin') {
+    // Mostrar el formulario solo si el usuario es administrador
+    ?>
+
+<form action="nuevo" method="POST" class="bg-dark p-4 rounded">
+
+    <div class="mb-2">
+        <label for="name" class="form-label text-light">Nombre</label>
+        <input type="text" name="name" id="name" class="form-control" required>
+    </div>
+    <div class="mb-2">
+        <label for="firstName" class="form-label text-light">Apellido</label>
+        <input type="text" name="firstName" id="firstName" class="form-control" required>
+    </div>
+    <div class="mb-2">
+        <label for="telephone" class="form-label text-light">Telefono</label>
+        <input type="text" name="telephone" id="telephone" class="form-control" required>
+    </div>
+    <div class="mb-2">
+        <label for="email" class="form-label text-light">Email</label>
+        <input type="text" name="email" id="email" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Agregar Vendedor</button>
+</form>
+<?php
+} else {
+    // Mostrar un mensaje de error si el usuario no es administrador
+    echo "<p class='text-light text-center mt-3 h4'>No tienes permiso para agregar ventas.</p>";
+}
+?>

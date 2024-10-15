@@ -1,28 +1,64 @@
 <?php require_once 'app/templates/layout/header.phtml'; ?>
 
 <?php if (isset($seller)): ?>
-    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h1 class="text-center text-light">Detalles del Vendedor</h1>
-                <ul class="list-group">
-                    <li class="list-group-item bg-dark text-light">Nombre: <?= $seller->Nombre ?></li>
-                    <li class="list-group-item bg-dark text-light">Apellido: <?= $seller->Apellido ?></li>
-                    <li class="list-group-item bg-dark text-light">Teléfono: <?= $seller->Telefono ?></li>
-                    <li class="list-group-item bg-dark text-light">Email: <?= $seller->Email ?></li>
-                    <li class="list-group-item bg-dark text-light">Calificación: <?= $seller->Calificacion ?></li>
-                </ul>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="text-center text-light">Detalles del Vendedor</h1>
+            <ul class="list-group">
+                <li class="list-group-item bg-dark text-light">Nombre:
+                    <?= isset($seller->Nombre) ? $seller->Nombre : 'No disponible' ?></li>
+                <li class="list-group-item bg-dark text-light">Apellido:
+                    <?= isset($seller->Apellido) ? $seller->Apellido : 'No disponible' ?></li>
+                <li class="list-group-item bg-dark text-light">Teléfono:
+                    <?= isset($seller->Telefono) ? $seller->Telefono : 'No disponible' ?></li>
+                <li class="list-group-item bg-dark text-light">Email:
+                    <?= isset($seller->Email) ? $seller->Email : 'No disponible' ?></li>
+            </ul>
 
-                <br>
-                <a href="<?= 'listar/'; ?>" class="btn btn-primary">Volver a la lista</a>
-            </div>
+            <br>
+
+            <!-- Verificar si el usuario es administrador -->
+            <?php if (isset($_SESSION['ROL_VENDEDOR']) && $_SESSION['ROL_VENDEDOR'] === 'admin'): ?>
+            <h3 class="text-light mt-4">Ventas realizadas por este vendedor:</h3>
+
+            <?php if (isset($ventas) && is_array($ventas) && count($ventas) > 0): ?>
+            <table class="table table-dark mt-3">
+                <thead>
+                    <tr>
+                        <th>Inmueble</th>
+                        <th>Fecha</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($ventas as $venta): ?>
+                    <tr>
+                        <td><?= $venta->inmueble ?></td>
+                        <td><?= $venta->fecha_venta ?></td>
+                        <td><?= $venta->precio ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <?php else: ?>
+            <p class="text-light">Este vendedor no ha realizado ninguna venta.</p>
+            <?php endif; ?>
+
+            <?php else: ?>
+            <p class="text-light">Solo los administradores pueden ver las ventas realizadas por este vendedor.</p>
+            <?php endif; ?>
+
+            <br>
+            <a href="<?= 'listar/'; ?>" class="btn btn-primary">Volver a la lista</a>
         </div>
     </div>
+</div>
 <?php else: ?>
-    <div class="container">
-        <h2 class="text-light">No se encontró información del vendedor.</h2>
-        <a href="<?= 'listar/'; ?>" class="btn btn-primary">Volver a la lista</a>
-    </div>
+<div class="container">
+    <h2 class="text-light">No se encontró información del vendedor.</h2>
+    <a href="<?= 'listar/'; ?>" class="btn btn-primary">Volver a la lista</a>
+</div>
 <?php endif; ?>
 
-<?php require_once 'app/templates/layout/header.phtml'; ?>
+<?php require_once 'app/templates/layout/footer.phtml'; ?>
