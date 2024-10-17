@@ -54,13 +54,19 @@ switch ($params[0]) {
     case 'nuevo':
         sessionAuthMiddleware($res);
         verifyAuthMiddleware($res);
-        $sellerController->addSeller();
-         break;
-    
+        $sellerController->showAddSellerForm();
+        break;
+        
+    case 'guardarVendedor':
+        sessionAuthMiddleware($res);  // Verifica si hay una sesión activa
+        verifyAuthMiddleware($res);   // Verifica si el usuario tiene permisos de administrador
+        $sellerController->saveSeller(); 
+        break;
+
     case 'eliminarVendedor':
         sessionAuthMiddleware($res);
         verifyAuthMiddleware($res);
-        if (isset($params[1]) && is_numeric($params[1])) { // Asegúrate de que el ID sea válido
+        if (isset($params[1]) && is_numeric($params[1])) { 
             $sellerController->deleteSeller($params[1]); // Elimina el ítem por su ID
         } else {
             echo "ID de venta no especificado o no válido."; // Maneja el error de un ID faltante o no válido
@@ -80,15 +86,15 @@ switch ($params[0]) {
     //Rutas públicas
     case 'listarVenta':
        $saleController->showSales();
-        break;
-        
-        case 'venta':
+    break;
+    
+    case 'venta':
         if (isset($params[1])) {
             $saleDetailController->showSaleById($params[1]);
         } else {
             echo "ID de la venta no especificado.";
         }
-        break;
+    break;
     //Rutas que requieren autenticación
     case 'nueva':
         sessionAuthMiddleware($res);

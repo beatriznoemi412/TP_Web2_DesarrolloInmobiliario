@@ -10,7 +10,6 @@ class SellerView {
         require_once 'app/templates/list_seller.phtml';
     }
     public function showSellerById($seller, $ventas){
-    
         require_once 'app/templates/seller_detail.phtml'; 
     }
     public function showEditSellerForm($seller) {
@@ -21,5 +20,8 @@ class SellerView {
     }
     public function setSuccessMessage($message) {
         return '<div class="alert alert-success" role="alert">' . htmlspecialchars($message) . '</div>';
+    }
+    public function showAddSellerForm($sellers){
+        require 'app/templates/form_agregar_vendedor.phtml';
     }
 }

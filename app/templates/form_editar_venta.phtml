@@ -1,3 +1,4 @@
+
 <?php require_once 'app/templates/layout/header.phtml'; ?>
 <div class="container mt-5">
     <h1 class="text-center text-light">Editar Venta</h1>
@@ -23,17 +24,18 @@
             <input type="number" class="form-control" name="price" id="price"
                 value="<?= htmlspecialchars($sale->precio) ?>" required>
         </div>
-        <!-- Select para elegir el vendedor -->
-        <div class="mb-2">
-            <label for="id_vendedor" class="form-label text-light">Asesor</label>
-            <select name="id_vendedor" id="id_vendedor" class="form-control" required>
-                <option value="">Seleccione un Asesor</option>
-                <option value="1" <?php if ($sale->Id_vendedor == 1) echo 'selected'; ?>>Asesor 1</option>
-                <option value="2" <?php if ($sale->Id_vendedor == 2) echo 'selected'; ?>>Asesor 2</option>
-                <option value="3" <?php if ($sale->Id_vendedor == 3) echo 'selected'; ?>>Asesor 3</option>
-                <option value="4" <?php if ($sale->Id_vendedor == 4) echo 'selected'; ?>>Asesor 4</option>
-            </select>
-        </div>
+        <label class="txt-light"for="id_vendedor">Vendedor:</label>
+    <select id="id_vendedor" name="id_vendedor" required>
+        <option value="">Selecciona un vendedor</option>
+        <?php if (!empty($sellers)): ?>
+        <?php foreach ($sellers as $seller): ?>
+        <option value="<?= $seller->id_vendedor; ?>">
+        <?= ($seller->id_vendedor == $sale->id_vendedor) ? 'seleccionado:' : ''; ?>
+        <?= htmlspecialchars($seller->Nombre . ' ' . $seller->Apellido); ?>
+        </option>
+        <?php endforeach; ?>
+        <?php endif; ?>
+    </select>
         <div class="text-center">
             <button type="submit" class="btn btn-primary text-light">Actualizar Venta</button>
             <a href= 'listarVenta'class="btn btn-secondary text-light">Cancelar</a>

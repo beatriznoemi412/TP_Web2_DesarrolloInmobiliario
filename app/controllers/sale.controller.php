@@ -16,89 +16,127 @@ class SaleController {
     }
     
     public function showAddSaleForm() {
-        
-            // Obtener la lista de vendedores
-        $sellers = $this->sellerModel->getSellers();
-            // Verificar si no hay vendedores disponibles
+        $sellers = $this->sellerModel->getSellers(); // Obtener la lista de vendedores
+    
+        die();
+        // Verificar si hay un error al obtener vendedores
+        if ($sellers === false) {
+            return $this->view->showError('Error al obtener vendedores.');
+        }
+        // Verificar si no hay vendedores disponibles
         if (empty($sellers)) {
-            echo 'No hay vendedores disponibles.'; // Muestra un mensaje si no hay vendedores
-            return $sellers; // Detener el flujo si no hay vendedores
+            return $this->view->showError('No hay vendedores disponibles.');
         }
-    }
-    public function showSales() {
-        // Obtengo los vendedores de la base de datos
-        $sales = $this->model->getSales();
-        
-        // Mando los vendedores a la vista
-        return $this->view->showSales($sales); 
-    }
-    public function addSale() {
+
+
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-     
-        // Obtener el rol del usuario actual usando la misma clave de sesión que en listSale.phtml
+        // Asegurarse de que la variable de sesión contiene el rol esperado
         $current_user_role = $_SESSION['ROL_VENDEDOR'] ?? null;
-
-        // Verificar si el usuario es administrador (o el rol que necesites)
+    
         if ($current_user_role !== 'admin') {
-            header('Location: ' . BASE_URL . '?error=No tienes permiso para eliminar esta venta.');
-            exit();
+            // Si el usuario no es admin, redirige o muestra un error
+            return $this->view->showError('Acceso no autorizado.');
         }
-      
-    // Verificar si el formulario fue enviado correctamente
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Validar que los campos requeridos estén completos
-        if (empty($_POST['inmueble']) || empty($_POST['date']) || empty($_POST['price']) || empty($_POST['id_vendedor']) || empty($_POST['image'])) {
-            return $this->view->showError('Todos los campos son obligatorios.');
-        }
-
-        // Obtener los datos del formulario
-        $inmueble = $_POST['inmueble'];  
-        $date = $_POST['date'];
-        $price = $_POST['price'];
-        $id_vendedor = $_POST['id_vendedor'];
-        $image = $_POST['image'];
-        
-        // Validar que la URL de la imagen sea válida
-        if (!filter_var($image, FILTER_VALIDATE_URL)) {
-            return $this->view->showError('La URL de la imagen no es válida.');
-        }
-
-        // Insertar la venta en la base de datos
-        $id = $this->model->insertSale($inmueble, $date, $price, $id_vendedor, $image);
-
-        // Verificar si la inserción fue exitosa ACA
-        if ($id) {
-            header('Location: ' . 'listarVenta'); 
-            exit();
-        } else {
-            return $this->view->showError('Hubo un problema al agregar la venta.');
-        }
-
-
-
-        } else {
-            $sellers = $this->sellerModel->getSellers();
-        
-        // Llamar al método para mostrar el formulario y pasarle los vendedores
-            return $this->showAddSaleForm($sellers);
-        }
+    
+        // Renderizar el formulario y pasar los vendedores a la vista
+        return $this->view->showAddSaleForm($sellers);
     }
+    
+    public function showSales() {
+        // Obtengo las ventas de la base de datos
+        $sales = $this->model->getSales();
+        $sellers = $this->sellerModel->getSellers();
+        // Comprobar si hay ventas
+        if (empty($sales)) {
+            return $this->view->showError('No hay ventas registradas.');
+        }
 
-
-
-public function deleteSale($id) {
-    // Verificar si el ID de la venta es válido
-    if (!empty($id)) {
-        // Iniciar la sesión si aún no está iniciada
+        // Comprobar si hay vendedores
+        if (empty($sellers)) {
+        return $this->view->showError('No hay vendedores disponibles.');
+        }
+        // Mando las ventas a la vista
+        return $this->view->showSales($sales, $sellers); 
+    }
+    
+    public function addSale() {
+        // Iniciar la sesión si no está ya iniciada
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
+        }
+    
+        // Obtener el rol del usuario actual
+        $current_user_role = $_SESSION['ROL_VENDEDOR'] ?? null;
+        var_dump($_SESSION);
+        // Verificar si el usuario es administrador
+        if ($current_user_role !== 'admin') {
+            return $this->view->showError('Acceso no autorizado.');
+        }
+
+    
+        // Verificar si el formulario fue enviado correctamente
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Validar que los campos requeridos estén completos
+            if (empty($_POST['inmueble']) || empty($_POST['date']) || empty($_POST['price']) || empty($_POST['id_vendedor']) || empty($_POST['image'])) {
+                return $this->view->showError('Todos los campos son obligatorios.');
+            }
+    
+            // Obtener los datos del formulario
+            $inmueble = $_POST['inmueble'];  
+            $date = $_POST['date'];
+            $price = $_POST['price'];
+            $id_vendedor = $_POST['id_vendedor'];
+            $image = $_POST['image'];
+    
+            // Validar que la URL de la imagen sea válida
+            if (!filter_var($image, FILTER_VALIDATE_URL)) {
+                return $this->view->showError('La URL de la imagen no es válida.');
+            }
+    
+            // Insertar la venta en la base de datos
+            $id = $this->model->insertSale($inmueble, $date, $price, $id_vendedor, $image);
+    
+            // Verificar si la inserción fue exitosa
+            if ($id) {
+                $this->view->showSuccess(' agregado con éxito.');
+                return $this->showSales(); // Retorna la vista actualizada
+          //  } else {
+            //    header('Location: ' . BASE_URL . '/listarVenta'); 
+            //    exit();
+            } else {
+                return $this->view->showError('Hubo un problema al agregar la venta.');
+            }
+        } else {
+            // Obtener la lista de vendedores
+            $sellers = $this->sellerModel->getSellers(); // Obtener la lista de vendedores
+    
+             // Comprobar si se obtuvieron vendedores
+        if (empty($sellers)) {
+            return $this->view->showError('No hay vendedores disponibles.');
+        }
+
+        // Llamar al método para mostrar el formulario y pasarle los vendedores
+        return $this->showAddSaleForm($sellers); // Llama al formulario pasando selectSellers
+
+        }
+    }
+    
+    
+
+
+    public function deleteSale($id) {
+    // Verificar si el ID de la venta es válido
+        if (!empty($id)) {
+        // Iniciar la sesión si aún no está iniciada
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
         }
 
         // Obtener el rol del usuario actual usando la misma clave de sesión que en listSale.phtml
         $current_user_role = $_SESSION['ROL_VENDEDOR'] ?? null;
-
+        
         // Verificar si el usuario es administrador (o el rol que necesites)
         if ($current_user_role !== 'admin') {
             header('Location: ' . BASE_URL . '?error=No tienes permiso para eliminar esta venta.');
@@ -161,16 +199,25 @@ public function editSale($id) {
             $image = $_POST['image'];
             
             if ($this->model->updateSale($id, $inmueble, $date, $price, $id_vendedor, $image)) {
-                header('Location: ' . BASE_URL . 'listarVenta?success=Venta actualizada con éxito.');
+                header('Location: ' . BASE_URL . '/listarVenta?success=Venta actualizada con éxito.');
                 exit();
             } else {
                 return $this->view->showError('Hubo un problema al actualizar la venta.');
             }
-        }
+        } else {
+            // Obtener la lista de vendedores
+            $sellers = $this->sellerModel->getSellers(); // Obtener la lista de vendedores
 
-            $this->view->showEditSaleForm($sale);
-            } else {
-                return $this->view->showError('Venta no encontrada.');
+            // Comprobar si se obtuvieron vendedores
+            if (empty($sellers)) {
+                return $this->view->showError('No hay vendedores disponibles.');
             }
+
+            // Llamar al método para mostrar el formulario de edición y pasarle los datos de la venta y los vendedores
+            $this->view->showEditSaleForm($sale, $sellers);
         }
+    } else {
+        return $this->view->showError('Venta no encontrada.');
+        }
+    }
 }

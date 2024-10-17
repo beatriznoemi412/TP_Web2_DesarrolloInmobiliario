@@ -1,9 +1,13 @@
 <?php require_once 'app/templates/layout/header.phtml'; ?>
-<?php require_once 'app/templates/form_agregar_vendedor.phtml'; ?>
 
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+
+<div class=" container d-flex justify-content-center align-items-center">
     <div class="row">
         <div class="col-12 text-center">
+        <?php if (isset($_SESSION['ROL_VENDEDOR']) && $_SESSION['ROL_VENDEDOR'] === 'admin'): ?>
+                <h4 class="text-light">Agregar Vendedor</h4>
+                <?php require_once 'app/templates/form_agregar_vendedor.phtml'; ?>
+            <?php endif; ?>
             <h1 class="text-center text-light">Lista de Vendedores</h1>
             <p class="text-center text-light">Total de vendedores: <?= $count ?></p>
 

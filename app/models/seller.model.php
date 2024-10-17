@@ -4,6 +4,7 @@ class SellerModel {
 
     public function __construct() {
        $this->db = new PDO('mysql:host=localhost;dbname=desarrolloinmobiliario;charset=utf8', 'root', '');
+       $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Manejo de errores
     }
  
     public function getSellers() {
@@ -13,7 +14,12 @@ class SellerModel {
     
         // 3. Obtengo los datos en un arreglo de objetos
         $sellers = $query->fetchAll(PDO::FETCH_OBJ); 
-         
+        
+         // Comprobar si se encontraron resultados
+        if (empty($sellers)) {
+            return []; // Retornar arreglo vacio si no hay vendedores
+        }
+
         return $sellers;
     }
    
@@ -46,16 +52,18 @@ class SellerModel {
         $stmt->execute(['id_vendedor' => $id]);
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
-    public function insertSeller($name, $firstName, $telephone, $email) { 
+    public function insertSeller($name, $firstName, $telephone, $email) {
         try {
             $query = $this->db->prepare('INSERT INTO vendedores(Nombre, Apellido, Telefono, Email) VALUES (?, ?, ?, ?)');
             $query->execute([$name, $firstName, $telephone, $email]);
+            
             return $this->db->lastInsertId();
         } catch (PDOException $e) {
-            error_log($e->getMessage());
-            return null; 
+            error_log('Error al insertar vendedor: ' . $e->getMessage()); // Mensaje de error más claro
+            return false; // Retorna falso en caso de error
         }
     }
+    
     public function removeSeller($id) {
         try {
             $query = $this->db->prepare('DELETE FROM vendedores WHERE id_vendedor = ?');
@@ -70,14 +78,14 @@ class SellerModel {
         }
     }
     
-    public function getSellerById($id) {
+   /* public function getSellerById($id) {
         try {
             if (!is_numeric($id)) {
                 throw new InvalidArgumentException("Invalid Seller ID.");
             }
             $query = $this->db->prepare('SELECT * FROM vendedores WHERE id_vendedor = ?');
             $query->execute([$id]);
-            return $query->fetch(PDO::FETCH_OBJ); // Devuelve un objeto de la venta
+            return $query->fetch(PDO::FETCH_OBJ); 
         } catch (PDOException $e) {
             error_log($e->getMessage());
             return null; // Retorna null en caso de error
@@ -85,18 +93,27 @@ class SellerModel {
             error_log($e->getMessage());
             return null;
             }
-        }
-
+        }*/
+       
     
-     public function updateSeller($id, $name, $firstName, $telephone, $email) {
-        try {
-         // Corrige la consulta eliminando la coma antes de 'WHERE'
-            $query = $this->db->prepare('UPDATE vendedores SET Nombre = ?, Apellido = ?, Telefono = ?, Email = ? WHERE id_vendedor = ?');
-            // Ejecutar la consulta con los parámetros
-            return $query->execute([$name, $firstName, $telephone, $email, $id]);
-        } catch (PDOException $e) {
-            error_log($e->getMessage()); // Log del error
-            return false; // Retorna false en caso de error
+        public function updateSeller($id, $name, $firstName, $telephone, $email) {
+            try {
+                // Preparar la consulta SQL
+                $query = $this->db->prepare('UPDATE vendedores SET Nombre = ?, Apellido = ?, Telefono = ?, Email = ? WHERE id_vendedor = ?');
+        
+                // Ejecutar la consulta con los parámetros
+                if (!$query->execute([$name, $firstName, $telephone, $email, $id])) {
+                    // Si execute devuelve false, hay un error
+                    $errorInfo = $query->errorInfo(); // Obtiene información sobre el error
+                    error_log('Error SQL: ' . $errorInfo[2]); // Registra el mensaje de error
+                    return false; // O puedes lanzar una excepción
+                }
+        
+                return true; // Si todo fue bien
+            } catch (PDOException $e) {
+                // Manejo de excepciones en caso de que haya un error de conexión o de consulta
+                error_log('Error en la base de datos: ' . $e->getMessage()); // Registra el error
+                return false; // O se puede lanzar una excepción
             }
         }
-    }
+    }        

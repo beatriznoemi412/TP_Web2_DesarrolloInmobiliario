@@ -1,53 +1,36 @@
-<?php
-// Verificar si la sesión está iniciada
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
-// Verificar si el usuario tiene el rol de administrador
-$current_user_role = $_SESSION['ROL_VENDEDOR'] ?? null;
+<form action="nueva" method="POST" class="bg-dark rounded">
+    <!-- Campo para ingresar la URL de la foto -->
+    <div>
+        <label for="image" class="form-label text-light">URL de la Foto</label>
+        <input type="url" name="image" id="image" class="form-control" placeholder="http://example.com/imagen.jpg"
+            required>
+    </div>
+    <div>
+        <label for="inmueble" class="form-label text-light">Inmueble</label>
+        <input type="text" name="inmueble" id="inmueble" class="form-control" required>
+    </div>
+    <div>
+        <label for="date" class="form-label text-light">Fecha</label>
+        <input type="date" name="date" id="date" class="form-control" required>
+    </div>
+    <div>
+        <label for="price" class="form-label text-light">Precio</label>
+        <input type="number" name="price" id="price" class="form-control" step="0.01" required>
+    </div>
 
-if ($current_user_role === 'admin') {
-    // Mostrar el formulario solo si el usuario es administrador
-    ?>
-    <form action="nueva" method="POST" class="bg-dark p-4 rounded">
-        <!-- Campo para ingresar la URL de la foto -->
-        <div class="mb-2">
-            <label for="image" class="form-label text-light">URL de la Foto</label>
-            <input type="url" name="image" id="image" class="form-control" placeholder="http://example.com/imagen.jpg" required>
-        </div>
-        <div class="mb-2">
-            <label for="inmueble" class="form-label text-light">Inmueble</label>
-            <input type="text" name="inmueble" id="inmueble" class="form-control" required>
-        </div>
-        <div class="mb-2">
-            <label for="date" class="form-label text-light">Fecha</label>
-            <input type="date" name="date" id="date" class="form-control" required>
-        </div>
-        <div class="mb-2">
-            <label for="price" class="form-label text-light">Precio</label>
-            <input type="number" name="price" id="price" class="form-control" step="0.01" required>
-        </div>
-        
-        <label for="id">Seleccionar Asesor</label>
-<select name="id" id="id" <?php echo empty($sellers) ? '' : 'required'; ?>>
-    <option value="">Seleccione un asesor</option>
-    <?php if (!empty($sellers)) { // Verificar si la lista de vendedores no está vacía ?>
-        <?php foreach ($sellers as $seller) { ?> 
-            <option value="<?php echo $seller->id_vendedor; ?>"><?php echo $seller->Nombre; ?></option> 
-        <?php } ?>
-    <?php } else { ?>
-        <option value="">No hay asesores disponibles</option>
-    <?php } ?>
-</select>
-<div>
+    <label for="id_vendedor">Vendedor:</label>
+    <select id="id_vendedor" name="id_vendedor" required>
+        <option value="">Selecciona un vendedor</option>
+        <?php if (!empty($sellers)): ?>
+        <?php foreach ($sellers as $seller): ?>
+        <option value="<?= $seller->id_vendedor; ?>">
+            <?= $seller->Nombre . ' ' . $seller->Apellido; ?>
+        </option>
+        <?php endforeach; ?>
+        <?php endif; ?>
+    </select>
+
+
     <button type="submit" class="btn btn-primary">Agregar Venta</button>
-</div>
-<?php if (empty($sellers)) { ?>
-    <div class="alert alert-warning">No hay asesores disponibles para agregar una venta.</div>
-<?php } ?>
 </form>
-
-<?php
-} 
-?>

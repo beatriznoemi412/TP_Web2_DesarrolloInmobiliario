@@ -1,7 +1,8 @@
 <?php require_once 'app/templates/layout/header.phtml'; ?>
 <div class="container mt-5">
     <h1 class="text-center text-light">Editar Info Asesores</h1>
-    <form method="POST" action="editarVendedor/<?= htmlspecialchars($seller->Id_vendedor) ?>">
+    <form method="POST" action="editarVendedor<?= htmlspecialchars($seller->id_vendedor) ?>">
+     
 
         <div class="mb-3">
             <label for="name" class="form-label text-light">Nombre</label>
@@ -29,7 +30,7 @@
 
         <div class="text-center">
             <button type="submit" class="btn btn-primary text-light">Actualizar Datos Asesor</button>
-            <a href="<?= BASE_URL . 'listar' ?>" class="btn btn-secondary text-light">Cancelar</a>
+            <a href="listar" class="btn btn-secondary text-light">Cancelar</a>
         </div>
     </form>
 </div>

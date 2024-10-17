@@ -1,5 +1,5 @@
 <?php
-require_once 'app/models/Model.php'; // Importa 
+require_once 'app/models/model.php'; 
 require_once 'app/models/user.model.php';
 require_once 'app/views/auth.view.php';
 
@@ -40,11 +40,11 @@ class AuthController {
     
             if ($userFromDB && password_verify($password, $userFromDB->password)) {
                 // Guarda en la sesión los detalles del usuario
-                $_SESSION['ID_VENDEDOR'] = $userFromDB->Id_vendedor; // ID del vendedor
+                $_SESSION['ID_VENDEDOR'] = $userFromDB->id_vendedor; // ID del vendedor
                 $_SESSION['USUARIO_VENDEDOR'] = $userFromDB->usuario; // Nombre del vendedor
                 $_SESSION['ROL_VENDEDOR'] = $userFromDB->rol;  // Guardar el rol del vendedor (por ejemplo, 'admin' o 'vendedor')
                 $_SESSION['LAST_ACTIVITY'] = time(); // Tiempo de la última actividad
-    
+                var_dump($_SESSION); // 
                 // Redirige al home o a la página deseada
                 header('Location: ' . BASE_URL);
                 exit(); 

@@ -2,7 +2,7 @@
 
 class SaleView {
 
-    public function showSales($sales) {
+    public function showSales($sales, $sellers) {
         // la vista define una nueva variable con la cantida de vendedores
         $count = count($sales);
 
@@ -16,11 +16,11 @@ class SaleView {
     public function showError($message) {
         echo '<div class="alert alert-danger">' . htmlspecialchars($message) . '</div>';
     }
-    public function showEditSaleForm($sale) {
+    public function showEditSaleForm($sale, $sellers) {
         require 'app/templates/form_editar_venta.phtml'; 
     }
 
-    public function showAddSaleForm($sellers) {
+    public function showAddSaleForm($sale, $sellers) {
         require 'app/templates/form_agregar_venta.phtml'; 
     }
 

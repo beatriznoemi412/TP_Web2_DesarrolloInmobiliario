@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-10-2024 a las 03:45:57
+-- Tiempo de generación: 16-10-2024 a las 03:19:47
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -43,10 +43,10 @@ CREATE TABLE `vendedores` (
 --
 
 INSERT INTO `vendedores` (`id_vendedor`, `Nombre`, `Apellido`, `Telefono`, `Email`, `usuario`, `password`, `rol`) VALUES
-(1, 'Agustín', 'Castro', '2494678635', 'agustinC@gmail.com', 'webadmin', '$2a$12$mvhk0vIlA2p3LU.cQw/OxOrWxQFOk71l0Eq8I94pvcQTF5Z32icBu', 'admin'),
-(2, 'Pamela ', 'Sosa', '2494582311', 'pamsosa@gmail.com', '', '', 'vendedor'),
-(3, 'Juan', 'Arce', '2494985634', 'ja@gmail.com', '', '', 'vendedor'),
-(4, 'Carmen', 'Lopez', '2494123122', 'carmenlo@gmail.com', '', '', 'vendedor');
+(1, 'Agustín Leonel', 'Castro', '2494678638', 'agustinC@gmail.com', 'webadmin', '$2a$12$mvhk0vIlA2p3LU.cQw/OxOrWxQFOk71l0Eq8I94pvcQTF5Z32icBu', 'admin'),
+(2, 'Pamela Andrea', 'Sosa', '2494582311', 'pamsosa@gmail.com', '', '', 'vendedor'),
+(3, 'Juan Manuel', 'Arce', '2494985635', 'ja@gmail.com', '', '', 'vendedor'),
+(8, 'Carmen', 'Lopez', '2494123123', 'carmenlo@gmail.com', '', '', 'vendedor');
 
 -- --------------------------------------------------------
 
@@ -59,7 +59,7 @@ CREATE TABLE `venta` (
   `inmueble` varchar(300) NOT NULL,
   `fecha_venta` date NOT NULL,
   `precio` int(11) NOT NULL,
-  `Id_vendedor` int(11) NOT NULL,
+  `id_vendedor` int(11) NOT NULL,
   `foto_url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -67,10 +67,11 @@ CREATE TABLE `venta` (
 -- Volcado de datos para la tabla `venta`
 --
 
-INSERT INTO `venta` (`id_venta`, `inmueble`, `fecha_venta`, `precio`, `id_vendedor`, `foto_url`) VALUES
-(31, 'Lujosa casa en country golf', '2024-08-07', 525000, 1, 'https://cdn.pixabay.com/photo/2016/08/16/03/50/exterior-1597098_1280.jpg'),
-(34, 'Departamento en pleno centro Tandil', '2024-08-13', 220000, 3, 'https://cdn.pixabay.com/photo/2014/09/04/05/54/construction-435302_1280.jpg'),
-(35, 'Casa importante cerca del lago de Tandil', '2024-08-23', 480000, 2, 'https://cdn.pixabay.com/photo/2013/09/24/12/08/apartment-185779_1280.jpg');
+INSERT INTO `venta` (`id_venta`, `inmueble`, `fecha_venta`, `precio`, `Id_vendedor`, `foto_url`) VALUES
+(34, 'Departamento en pleno centro Tandil', '2024-09-04', 229000, 3, 'https://cdn.pixabay.com/photo/2014/09/04/05/54/construction-435302_1280.jpg'),
+(35, 'Casa importante cerca del lago de Tandil', '2024-07-07', 480000, 2, 'https://cdn.pixabay.com/photo/2013/09/24/12/08/apartment-185779_1280.jpg'),
+(36, ' Excepcional cabaña en frente lago de Tandil, en plena sierra', '2024-10-08', 280000, 3, 'https://cdn.pixabay.com/photo/2016/09/23/10/20/cottage-1689224_1280.jpg'),
+(53, 'apartament', '2024-10-24', 12000, 2, 'https://cdn.pixabay.com/photo/2017/08/27/10/16/interior-2685521_1280.jpg');
 
 --
 -- Índices para tablas volcadas
@@ -88,7 +89,7 @@ ALTER TABLE `vendedores`
 --
 ALTER TABLE `venta`
   ADD UNIQUE KEY `id_venta` (`id_venta`),
-  ADD KEY `id_vendedor` (`id_vendedor`);
+  ADD KEY `Id_vendedor` (`Id_vendedor`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -98,13 +99,13 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `vendedores`
 --
 ALTER TABLE `vendedores`
-  MODIFY `Id_vendedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_vendedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- Restricciones para tablas volcadas
@@ -114,7 +115,7 @@ ALTER TABLE `venta`
 -- Filtros para la tabla `venta`
 --
 ALTER TABLE `venta`
-  ADD CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`Id_vendedor`) REFERENCES `vendedores` (`Id_vendedor`);
+  ADD CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`id_vendedor`) REFERENCES `vendedores` (`id_vendedor`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

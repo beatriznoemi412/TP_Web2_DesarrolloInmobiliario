@@ -1,5 +1,5 @@
 <?php
-require_once 'app/config.php'; // Asegúrate de que el archivo config.php esté en el mismo directorio
+require_once 'app/config.php'; 
 
 class UserModel {
     private $db;

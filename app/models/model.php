@@ -22,7 +22,7 @@ class Model {
             // Creación de la tabla 'vendedores'
             $sql =<<<SQL
                 CREATE TABLE IF NOT EXISTS `vendedores` (
-                    `Id_vendedor` int(11) NOT NULL AUTO_INCREMENT,
+                    `id_vendedor` int(11) NOT NULL AUTO_INCREMENT,
                     `Nombre` varchar(50) NOT NULL,
                     `Apellido` varchar(50) NOT NULL,
                     `Telefono` varchar(70) NOT NULL,
@@ -41,10 +41,10 @@ class Model {
                     `inmueble` varchar(300) NOT NULL,
                     `fecha_venta` date NOT NULL,
                     `precio` int(11) NOT NULL,
-                    `Id_vendedor` int(11) NOT NULL,
+                    `id_vendedor` int(11) NOT NULL,
                     `foto_url` varchar(255) DEFAULT NULL,
                     PRIMARY KEY (`id_venta`),
-                    FOREIGN KEY (`Id_vendedor`) REFERENCES `vendedores`(`Id_vendedor`)
+                    FOREIGN KEY (`id_vendedor`) REFERENCES `vendedores`(`id_vendedor`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
             SQL;
 
@@ -66,7 +66,7 @@ class Model {
 
             // Agregar datos iniciales a la tabla 'venta'
             $sql_insert_ventas = <<<SQL
-                INSERT INTO `venta` (`inmueble`, `fecha_venta`, `precio`, `Id_vendedor`, `foto_url`)
+                INSERT INTO `venta` (`inmueble`, `fecha_venta`, `precio`, `id_vendedor`, `foto_url`)
                 VALUES
                 ('Lujosa casa en country golf', '2024-08-07', 525000, 1, 'https://cdn.pixabay.com/photo/2016/08/16/03/50/exterior-1597098_1280.jpg'),
                 ('Departamento en pleno centro Tandil', '2024-08-13', 220000, 3, 'https://cdn.pixabay.com/photo/2014/09/04/05/54/construction-435302_1280.jpg'),

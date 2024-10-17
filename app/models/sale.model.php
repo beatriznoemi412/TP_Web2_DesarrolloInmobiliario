@@ -9,15 +9,15 @@ class SaleModel {
 
 
     public function getSales() {
-        try {
+        //try {
             // Prepare and execute the query to fetch all sales
             $query = $this->db->prepare('SELECT * FROM venta');
             $query->execute();
             return $query->fetchAll(PDO::FETCH_OBJ); // Fetch all results as an array of objects
-        } catch (PDOException $e) {
-            error_log($e->getMessage());
-            return []; // Return an empty array in case of error
-        }
+       // } catch (PDOException $e) {
+        //    error_log($e->getMessage());
+         //   return []; // Return an empty array in case of error
+        //}
     }
 
     public function getSale($id) {    
@@ -79,7 +79,7 @@ class SaleModel {
     public function updateSale($id, $inmueble, $date, $price, $id_vendedor, $image) {
         try {
             
-            $query = $this->db->prepare('UPDATE venta SET inmueble = ?, fecha_venta = ?, precio = ?, Id_vendedor = ?, foto_url = ? WHERE id_venta = ?');
+            $query = $this->db->prepare('UPDATE venta SET inmueble = ?, fecha_venta = ?, precio = ?, id_vendedor = ?, foto_url = ? WHERE id_venta = ?');
             
             // Ejecutar la consulta con los parámetros
             return $query->execute([$inmueble, $date, $price, $id_vendedor, $image, $id]);
