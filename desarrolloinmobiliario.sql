@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-10-2024 a las 01:54:22
+-- Tiempo de generación: 18-10-2024 a las 15:40:27
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -43,11 +43,10 @@ CREATE TABLE `vendedores` (
 --
 
 INSERT INTO `vendedores` (`id_vendedor`, `Nombre`, `Apellido`, `Telefono`, `Email`, `usuario`, `password`, `rol`) VALUES
-(1, 'Agustín Leonel', 'Castro', '2494678638', 'agustinC@gmail.com', 'webadmin', '$2a$12$mvhk0vIlA2p3LU.cQw/OxOrWxQFOk71l0Eq8I94pvcQTF5Z32icBu', 'admin'),
+(1, 'Agustín Leonel', 'Castro', '2494678637', 'agustinC@gmail.com', 'webadmin', '$2a$12$mvhk0vIlA2p3LU.cQw/OxOrWxQFOk71l0Eq8I94pvcQTF5Z32icBu', 'admin'),
 (2, 'Pamela Andrea', 'Sosa', '2494582311', 'pamsosa@gmail.com', '', '', 'vendedor'),
-(3, 'Juan Manuel', 'Arce', '2494985635', 'ja@gmail.com', '', '', 'vendedor'),
-(47, 'Jaime', 'Cufre', '2494210967', 'jaime@gmail.com', '', '', 'vendedor'),
-(48, 'Nora', 'Pascal', '2494302987', 'pascal@gmail.com', '', '', 'vendedor');
+(3, 'Atilio', 'Arce', '2494985635', 'ja@gmail.com', '', '', 'vendedor'),
+(48, 'Nora Alicia', 'Pascal', '2494302987', 'pascal@gmail.com', '', '', 'vendedor');
 
 -- --------------------------------------------------------
 
@@ -69,9 +68,11 @@ CREATE TABLE `venta` (
 --
 
 INSERT INTO `venta` (`id_venta`, `inmueble`, `fecha_venta`, `precio`, `id_vendedor`, `foto_url`) VALUES
-(34, 'Departamento en pleno centro Tandil', '2024-09-04', 229000, 3, 'https://cdn.pixabay.com/photo/2014/09/04/05/54/construction-435302_1280.jpg'),
-(35, 'Casa importante cerca del lago de Tandil.', '2024-07-07', 480000, 48, 'https://cdn.pixabay.com/photo/2013/09/24/12/08/apartment-185779_1280.jpg'),
-(36, ' Excepcional cabaña en frente lago de Tandil, en plena sierra', '2024-10-08', 280000, 3, 'https://cdn.pixabay.com/photo/2016/09/23/10/20/cottage-1689224_1280.jpg');
+(34, 'Departamento en pleno centro Tandil', '2024-09-04', 228990, 3, 'https://cdn.pixabay.com/photo/2014/09/04/05/54/construction-435302_1280.jpg'),
+(35, 'Casa importante cerca del lago de Tandil.', '2024-07-07', 485000, 48, 'https://cdn.pixabay.com/photo/2013/09/24/12/08/apartment-185779_1280.jpg'),
+(36, ' Excepcional cabaña en frente lago de Tandil, en plena sierra', '2024-10-08', 286000, 3, 'https://cdn.pixabay.com/photo/2016/09/23/10/20/cottage-1689224_1280.jpg'),
+(71, 'Espectacular casa en las sierras de Tandil con vista inmejorable', '2024-09-04', 450000, 1, 'https://cdn.pixabay.com/photo/2017/04/10/22/28/residence-2219972_1280.jpg'),
+(72, 'Espectacular casa en las sierras de Tandil con vista inmejorable', '2024-09-04', 470000, 1, 'https://www.elmueble.com/medio/2018/02/15/dsc9100_54145a8f.jpg');
 
 --
 -- Índices para tablas volcadas
@@ -99,13 +100,13 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `vendedores`
 --
 ALTER TABLE `vendedores`
-  MODIFY `id_vendedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id_vendedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- Restricciones para tablas volcadas
