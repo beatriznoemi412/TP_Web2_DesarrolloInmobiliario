@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-10-2024 a las 15:40:27
+-- Tiempo de generación: 18-10-2024 a las 23:54:56
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `desarrolloinmobiliario`
 --
+CREATE DATABASE IF NOT EXISTS `desarrolloinmobiliario` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `desarrolloinmobiliario`;
 
 -- --------------------------------------------------------
 
@@ -27,16 +29,18 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `vendedores`
 --
 
-CREATE TABLE `vendedores` (
-  `id_vendedor` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `vendedores` (
+  `id_vendedor` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(50) NOT NULL,
   `Apellido` varchar(50) NOT NULL,
   `Telefono` varchar(70) NOT NULL,
   `Email` varchar(50) NOT NULL,
   `usuario` varchar(50) NOT NULL,
   `password` char(150) NOT NULL,
-  `rol` enum('admin','vendedor') NOT NULL DEFAULT 'vendedor'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `rol` enum('admin','vendedor') NOT NULL DEFAULT 'vendedor',
+  PRIMARY KEY (`id_vendedor`),
+  UNIQUE KEY `Email` (`Email`)
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `vendedores`
@@ -54,14 +58,16 @@ INSERT INTO `vendedores` (`id_vendedor`, `Nombre`, `Apellido`, `Telefono`, `Emai
 -- Estructura de tabla para la tabla `venta`
 --
 
-CREATE TABLE `venta` (
-  `id_venta` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `venta` (
+  `id_venta` int(11) NOT NULL AUTO_INCREMENT,
   `inmueble` varchar(300) NOT NULL,
   `fecha_venta` date NOT NULL,
   `precio` int(11) NOT NULL,
   `id_vendedor` int(11) NOT NULL,
-  `foto_url` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `foto_url` varchar(255) DEFAULT NULL,
+  UNIQUE KEY `id_venta` (`id_venta`),
+  KEY `Id_vendedor` (`id_vendedor`)
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `venta`
@@ -70,43 +76,10 @@ CREATE TABLE `venta` (
 INSERT INTO `venta` (`id_venta`, `inmueble`, `fecha_venta`, `precio`, `id_vendedor`, `foto_url`) VALUES
 (34, 'Departamento en pleno centro Tandil', '2024-09-04', 228990, 3, 'https://cdn.pixabay.com/photo/2014/09/04/05/54/construction-435302_1280.jpg'),
 (35, 'Casa importante cerca del lago de Tandil.', '2024-07-07', 485000, 48, 'https://cdn.pixabay.com/photo/2013/09/24/12/08/apartment-185779_1280.jpg'),
-(36, ' Excepcional cabaña en frente lago de Tandil, en plena sierra', '2024-10-08', 286000, 3, 'https://cdn.pixabay.com/photo/2016/09/23/10/20/cottage-1689224_1280.jpg'),
-(71, 'Espectacular casa en las sierras de Tandil con vista inmejorable', '2024-09-04', 450000, 1, 'https://cdn.pixabay.com/photo/2017/04/10/22/28/residence-2219972_1280.jpg'),
-(72, 'Espectacular casa en las sierras de Tandil con vista inmejorable', '2024-09-04', 470000, 1, 'https://www.elmueble.com/medio/2018/02/15/dsc9100_54145a8f.jpg');
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `vendedores`
---
-ALTER TABLE `vendedores`
-  ADD PRIMARY KEY (`id_vendedor`),
-  ADD UNIQUE KEY `Email` (`Email`);
-
---
--- Indices de la tabla `venta`
---
-ALTER TABLE `venta`
-  ADD UNIQUE KEY `id_venta` (`id_venta`),
-  ADD KEY `Id_vendedor` (`id_vendedor`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `vendedores`
---
-ALTER TABLE `vendedores`
-  MODIFY `id_vendedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
-
---
--- AUTO_INCREMENT de la tabla `venta`
---
-ALTER TABLE `venta`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+(36, ' Excepcional cabaña en frente lago de Tandil, en plena sierra', '2024-10-08', 287000, 3, 'https://cdn.pixabay.com/photo/2016/09/23/10/20/cottage-1689224_1280.jpg'),
+(71, 'Espectacular casa en las sierras de Tandil con vista inmejorable', '2024-09-04', 455000, 1, 'https://cdn.pixabay.com/photo/2017/04/10/22/28/residence-2219972_1280.jpg'),
+(72, 'Espectacular casa en las sierras de Tandil con vista inmejorable', '2024-09-04', 470000, 1, 'https://www.elmueble.com/medio/2018/02/15/dsc9100_54145a8f.jpg'),
+(76, 'Casona de campo muy importante ', '2024-08-07', 467900, 2, 'https://cdn.pixabay.com/photo/2023/08/19/08/26/house-8200038_960_720.jpg');
 
 --
 -- Restricciones para tablas volcadas
