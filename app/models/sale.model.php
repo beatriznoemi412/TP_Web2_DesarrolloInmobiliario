@@ -9,16 +9,10 @@ class SaleModel {
 
 
     public function getSales() {
-        //try {
-            // Prepare and execute the query to fetch all sales
             $query = $this->db->prepare('SELECT * FROM venta');
             $query->execute();
             return $query->fetchAll(PDO::FETCH_OBJ); // Fetch all results as an array of objects
-       // } catch (PDOException $e) {
-        //    error_log($e->getMessage());
-         //   return []; // Return an empty array in case of error
-        //}
-    }
+       }
 
     public function getSale($id) {    
         try {

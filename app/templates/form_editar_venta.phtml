@@ -24,12 +24,13 @@
             <input type="number" class="form-control" name="price" id="price"
                 value="<?= htmlspecialchars($sale->precio) ?>" required>
         </div>
-        <label class="txt-light"for="id_vendedor">Vendedor:</label>
+        <label for="id_vendedor"></label>
     <select id="id_vendedor" name="id_vendedor" required>
         <option value="">Selecciona un vendedor</option>
         <?php if (!empty($sellers)): ?>
         <?php foreach ($sellers as $seller): ?>
         <option value="<?= $seller->id_vendedor; ?>">
+        <?= (isset($inmueble) && $seller->id_vendedor == $inmueble->id_vendedor) ? 'selected' : ''; ?>>   
         <?= ($seller->id_vendedor == $sale->id_vendedor) ? 'seleccionado:' : ''; ?>
         <?= htmlspecialchars($seller->Nombre . ' ' . $seller->Apellido); ?>
         </option>

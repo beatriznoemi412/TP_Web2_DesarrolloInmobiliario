@@ -77,43 +77,27 @@ class SellerModel {
             return false;
         }
     }
-    
-   /* public function getSellerById($id) {
-        try {
-            if (!is_numeric($id)) {
-                throw new InvalidArgumentException("Invalid Seller ID.");
-            }
-            $query = $this->db->prepare('SELECT * FROM vendedores WHERE id_vendedor = ?');
-            $query->execute([$id]);
-            return $query->fetch(PDO::FETCH_OBJ); 
-        } catch (PDOException $e) {
-            error_log($e->getMessage());
-            return null; // Retorna null en caso de error
-        } catch (InvalidArgumentException $e) {
-            error_log($e->getMessage());
-            return null;
-            }
-        }*/
        
     
-        public function updateSeller($id, $name, $firstName, $telephone, $email) {
-            try {
-                // Preparar la consulta SQL
-                $query = $this->db->prepare('UPDATE vendedores SET Nombre = ?, Apellido = ?, Telefono = ?, Email = ? WHERE id_vendedor = ?');
-        
-                // Ejecutar la consulta con los parámetros
-                if (!$query->execute([$name, $firstName, $telephone, $email, $id])) {
-                    // Si execute devuelve false, hay un error
-                    $errorInfo = $query->errorInfo(); // Obtiene información sobre el error
-                    error_log('Error SQL: ' . $errorInfo[2]); // Registra el mensaje de error
-                    return false; // O puedes lanzar una excepción
-                }
-        
-                return true; // Si todo fue bien
-            } catch (PDOException $e) {
-                // Manejo de excepciones en caso de que haya un error de conexión o de consulta
-                error_log('Error en la base de datos: ' . $e->getMessage()); // Registra el error
-                return false; // O se puede lanzar una excepción
+    public function updateSeller($id, $name, $firstName, $telephone, $email) {
+        try {
+            // Prepara la consulta SQL
+            $query = $this->db->prepare('UPDATE vendedores SET Nombre = ?, Apellido = ?, Telefono = ?, Email = ? WHERE id_vendedor = ?');
+    
+            // Ejecutara la consulta con los parámetros
+            if (!$query->execute([$name, $firstName, $telephone, $email, $id])) {
+                // Si execute devuelve false, hay un error
+                $errorInfo = $query->errorInfo(); // Obtiene información sobre el error
+                error_log('Error SQL: ' . $errorInfo[2]); // Registra el mensaje de error
+                return false; 
             }
+    
+            return true; // Si todo fue bien
+        } catch (PDOException $e) {
+            // Manejo de excepciones en caso de que haya un error de conexión o de consulta
+            error_log('Error en la base de datos: ' . $e->getMessage()); // Registra el error
+            return false; // O se puede lanzar una excepción
         }
-    }        
+    }
+   
+}    

@@ -47,7 +47,7 @@ URLs Semánticas: Todas las rutas son semánticas para mejorar la usabilidad y S
 Instalación
 
 Para desplegar el sitio en un servidor local:
-http://localhost/web2-1°EntregaTP/
+http://localhost/web2-1EntregaTP/
 
 
 

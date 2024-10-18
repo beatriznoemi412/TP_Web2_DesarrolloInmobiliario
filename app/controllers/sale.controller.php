@@ -123,9 +123,6 @@ class SaleController {
         }
     }
     
-    
-
-
     public function deleteSale($id) {
     // Verificar si el ID de la venta es válido
         if (!empty($id)) {
@@ -176,15 +173,13 @@ public function editSale($id) {
 
         // Verificar si el usuario es administrador
         if ($current_user_role !== 'admin') {
-            header('Location: ' . BASE_URL . '?error=No tienes permiso para editar esta venta.');
-            exit();
+            return $this->view->showError('No tienes permiso para editar esta venta.');
         }
 
         $sale = $this->model->getSaleById($id);
 
         if (!$sale) {
-            header('Location: ' . BASE_URL . '?error=Venta no encontrada.');
-            exit();
+            return $this->view->showError('Venta no encontrada.');
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

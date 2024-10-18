@@ -1,9 +1,10 @@
 <?php require_once 'app/templates/layout/header.phtml'; ?>
 <div class="container mt-5">
     <h1 class="text-center text-light">Editar Info Asesores</h1>
-    <form method="POST" action="editarVendedor<?= htmlspecialchars($seller->id_vendedor) ?>">
-     
 
+    <form method="POST" action="editarVendedor/<?= $seller->id_vendedor; ?>">
+    <input type="hidden" name="id_vendedor" value="<?php echo $seller->id_vendedor; ?>">
+    
         <div class="mb-3">
             <label for="name" class="form-label text-light">Nombre</label>
             <input type="text" class="form-control" name="name" id="name"

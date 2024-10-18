@@ -26,8 +26,7 @@
 
                         <!-- Mostrar los botones Editar y Borrar solo si el usuario es administrador -->
                         <?php if (isset($_SESSION['ROL_VENDEDOR']) && $_SESSION['ROL_VENDEDOR'] === 'admin'): ?>
-                        <a href="editarVendedor/<?= $seller->id_vendedor ?>" class="btn btn-warning btn-sm"
-                            role="button">Editar</a>
+                            <a href="editarVendedor/<?= $seller->id_vendedor ?>" type="button" class='btn btn-success btn-sm ml-auto'>Editar</a> 
                         <a href="eliminarVendedor/<?= $seller->id_vendedor ?>" type="button"
                             class="btn btn-danger btn-sm ml-auto">Borrar</a>
                         <?php endif; ?>

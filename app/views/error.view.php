@@ -2,6 +2,6 @@
 
 class ErrorView {
     public function showError($message) {
-        require_once 'app/templates/error.phtml'; 
+     //   require_once 'app/templates/error.phtml'; 
     }
 }
