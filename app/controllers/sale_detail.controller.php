@@ -13,17 +13,17 @@ class SaleDetailController {
     }
 
     public function showSaleById($id) {
-        // Validar que el ID sea numérico
+        // Valida que el ID sea numérico
         if (!is_numeric($id)) {
             echo "ID inválido.";
             return;
         }
 
-        // Obtener venta por ID
+        // Obtiene venta por ID
         $sale = $this->model->getSale($id);
 
         if ($sale) {
-            // Usar la vista ya instanciada
+            // Usa la vista ya instanciada
             $this->view->showSaleById($sale); 
         } else {
             echo "Venta no encontrada.";

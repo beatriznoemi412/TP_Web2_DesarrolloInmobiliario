@@ -1,18 +1,4 @@
 <?php
-// Habilitar la visualización de errores
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// Probar la conexión a la base de datos
-$conn = new mysqli('localhost', 'root', '', 'desarrolloinmobiliario');
-
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
-
-
-
 require_once 'app/models/seller.model.php';
 require_once 'app/views/seller.view.php';
 
@@ -35,7 +21,6 @@ class SellerController {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        // Asegurarse de que la variable de sesión contiene el rol esperado
         $current_user_role = $_SESSION['ROL_VENDEDOR'] ?? null;
     
         if ($current_user_role !== 'admin') {
@@ -43,7 +28,7 @@ class SellerController {
             return $this->view->showError('Acceso no autorizado.');
         }
     
-        // Mostrar el formulario si el usuario es administrador
+        // Muestra el formulario si el usuario es administrador
         return $this->view->showAddSellerForm();
     }
 
@@ -123,41 +108,41 @@ class SellerController {
         }
     }
     public function editSeller($id) {
-        // Verificar si el ID no está vacío
+        // Verifica si el ID no está vacío
         if (!empty($id)) {
-            // Iniciar la sesión si no está ya iniciada
+            // Inicia la sesión si no está ya iniciada
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
     
-            // Obtener el rol del usuario actual
+            // Obtiene el rol del usuario actual
             $current_user_role = $_SESSION['ROL_VENDEDOR'] ?? null;
     
-            // Verificar si el usuario es administrador
+            // Verifica si el usuario es administrador
             if ($current_user_role !== 'admin') {
                 return $this->view->showError('Acceso no autorizado.');
             }
     
-            // Obtener el vendedor por ID
+            // Obtiene el vendedor por ID
             $seller = $this->model->getSeller($id);
             if (!$seller) {
                 return $this->view->showError('Vendedor no encontrado.');
             }
     
-            // Comprobar si se envía el formulario
+            // Comprueba si se envía el formulario
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                // Verificar si todos los campos son obligatorios
+                // Verifica si todos los campos son obligatorios
                 if (empty($_POST['name']) || empty($_POST['firstName']) || empty($_POST['telephone']) || empty($_POST['email'])) {
                     return $this->view->showError('Todos los campos son obligatorios.');
                 }
                 
-                // Validar el ID del vendedor
+                // Valida el ID del vendedor
                 $id = filter_var($_POST['id_vendedor'], FILTER_VALIDATE_INT);
                 if (!$id) {
                     return $this->view->showError('ID de vendedor no válido.');
                 }
     
-                // Obtener datos del formulario
+                // Obtiene datos del formulario
                 $name = $_POST['name'];
                 $firstName = $_POST['firstName'];
                 $telephone = $_POST['telephone'];
@@ -184,7 +169,7 @@ class SellerController {
                 }
             }
     
-            // Mostrar el formulario para editar el vendedor
+            // Muestra el formulario para editar el vendedor
             $this->view->showEditSellerForm($seller);
         } else {
             return $this->view->showError('ID de vendedor no válido.');

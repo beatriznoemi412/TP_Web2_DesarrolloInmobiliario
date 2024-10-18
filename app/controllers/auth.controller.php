@@ -43,8 +43,7 @@ class AuthController {
                 $_SESSION['ID_VENDEDOR'] = $userFromDB->id_vendedor; // ID del vendedor
                 $_SESSION['USUARIO_VENDEDOR'] = $userFromDB->usuario; // Nombre del vendedor
                 $_SESSION['ROL_VENDEDOR'] = $userFromDB->rol;  // Guardar el rol del vendedor (por ejemplo, 'admin' o 'vendedor')
-                $_SESSION['LAST_ACTIVITY'] = time(); // Tiempo de la última actividad
-                var_dump($_SESSION); // 
+                $_SESSION['LAST_ACTIVITY'] = time(); // Tiempo de la última actividad 
                 // Redirige al home o a la página deseada
                 header('Location: ' . BASE_URL);
                 exit(); 

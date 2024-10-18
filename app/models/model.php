@@ -48,9 +48,9 @@ class Model {
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
             SQL;
 
-            // Ejecutar las consultas para crear las tablas
-            $this->db->exec($sql);  // Corrección: Ejecutar $sql para 'vendedores'
-            $this->db->exec($sql_venta); // Ejecutar $sql_venta para 'venta'
+            // Ejecuta las consultas para crear las tablas
+            $this->db->exec($sql);  
+            $this->db->exec($sql_venta); 
 
             // Agregar datos iniciales a la tabla 'vendedores'
             $sql_insert_vendedores = <<<SQL

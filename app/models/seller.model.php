@@ -8,14 +8,14 @@ class SellerModel {
     }
  
     public function getSellers() {
-        // 2. Ejecuto la consulta
+        //  Ejecuto la consulta
         $query = $this->db->prepare('SELECT * FROM vendedores');
         $query->execute();
     
-        // 3. Obtengo los datos en un arreglo de objetos
+        // Obtengo los datos en un arreglo de objetos
         $sellers = $query->fetchAll(PDO::FETCH_OBJ); 
         
-         // Comprobar si se encontraron resultados
+         // Compruebo si se encontraron resultados
         if (empty($sellers)) {
             return []; // Retornar arreglo vacio si no hay vendedores
         }
@@ -30,19 +30,19 @@ class SellerModel {
                 throw new InvalidArgumentException("El ID proporcionado no es válido.");
             }
             
-            // Preparar y ejecutar la consulta
+            // Prepara y ejecuta la consulta
             $query = $this->db->prepare('SELECT * FROM vendedores WHERE id_vendedor = ?');
             $query->execute([$id]);   
     
-            // Obtener el resultado
+            // Obtiene el resultado
             $seller = $query->fetch(PDO::FETCH_OBJ);
         
             return $seller;
     
         } catch (Exception $e) {
-            // Manejo de errores (puedes registrar el error o mostrar un mensaje adecuado)
+            // Manejo de errores 
             error_log($e->getMessage());
-            return null;  // o lo que sea apropiado en tu caso
+            return null;  
         }
     }
     public function getSalesBySellerId($id) {
@@ -60,7 +60,7 @@ class SellerModel {
             return $this->db->lastInsertId();
         } catch (PDOException $e) {
             error_log('Error al insertar vendedor: ' . $e->getMessage()); // Mensaje de error más claro
-            return false; // Retorna falso en caso de error
+            return false; 
         }
     }
     
@@ -96,7 +96,7 @@ class SellerModel {
         } catch (PDOException $e) {
             // Manejo de excepciones en caso de que haya un error de conexión o de consulta
             error_log('Error en la base de datos: ' . $e->getMessage()); // Registra el error
-            return false; // O se puede lanzar una excepción
+            return false; 
         }
     }
    

@@ -13,20 +13,20 @@ class SellerDetailController {
     }
 
     public function showSellerById($id) {
-        // Validar que el ID sea numérico
+        // Valida que el ID sea numérico
         if (!is_numeric($id)) {
             echo "ID inválido.";
             return;
         }
 
-        // Obtener el vendedor por ID
+        // Obtiene el vendedor por ID
         $seller = $this->model->getSeller($id);
 
         if ($seller) {
-             // Obtener las ventas asociadas a este vendedor
+             // Obtiene las ventas asociadas a este vendedor
         $ventas = $this->model->getSalesBySellerId($id);
 
-            // Usar la vista ya instanciada
+            // Usa la vista ya instanciada
             $this->view->showSellerById($seller, $ventas); 
         } else {
             echo "Vendedor no encontrado.";

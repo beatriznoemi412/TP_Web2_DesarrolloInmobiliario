@@ -1,8 +1,8 @@
-
 <?php require_once 'app/templates/layout/header.phtml'; ?>
 <div class="container mt-5">
     <h1 class="text-center text-light">Editar Venta</h1>
-    <form method="POST" action="editar/<?= htmlspecialchars($sale->id_venta) ?>"><!-- htmlsp..convierte caracteres especiales en sus equivalentes de entidades HTML.-->
+    <form method="POST" action="editar/<?= htmlspecialchars($sale->id_venta) ?>">
+        <!-- htmlsp..convierte caracteres especiales en sus equivalentes de entidades HTML.-->
         <div class="mb-3">
             <label for="image" class="imagen form-label text-light">URL de la Foto</label>
             <input type="url" class="form-control" name="image" id="image"
@@ -25,21 +25,21 @@
                 value="<?= htmlspecialchars($sale->precio) ?>" required>
         </div>
         <label for="id_vendedor"></label>
-    <select id="id_vendedor" name="id_vendedor" required>
-        <option value="">Selecciona un vendedor</option>
-        <?php if (!empty($sellers)): ?>
-        <?php foreach ($sellers as $seller): ?>
-        <option value="<?= $seller->id_vendedor; ?>">
-        <?= (isset($inmueble) && $seller->id_vendedor == $inmueble->id_vendedor) ? 'selected' : ''; ?>>   
-        <?= ($seller->id_vendedor == $sale->id_vendedor) ? 'seleccionado:' : ''; ?>
-        <?= htmlspecialchars($seller->Nombre . ' ' . $seller->Apellido); ?>
-        </option>
-        <?php endforeach; ?>
-        <?php endif; ?>
-    </select>
+        <select id="id_vendedor" name="id_vendedor" required>
+            <option value="">Selecciona un vendedor</option>
+            <?php if (!empty($sellers)): ?>
+            <?php foreach ($sellers as $seller): ?>
+            <option value="<?= $seller->id_vendedor; ?>">
+                <?= (isset($inmueble) && $seller->id_vendedor == $inmueble->id_vendedor) ? 'selected' : ''; ?>>
+                <?= ($seller->id_vendedor == $sale->id_vendedor) ? 'seleccionado:' : ''; ?>
+                <?= htmlspecialchars($seller->Nombre . ' ' . $seller->Apellido); ?>
+            </option>
+            <?php endforeach; ?>
+            <?php endif; ?>
+        </select>
         <div class="text-center">
             <button type="submit" class="btn btn-primary text-light">Actualizar Venta</button>
-            <a href= 'listarVenta'class="btn btn-secondary text-light">Cancelar</a>
+            <a href='listarVenta' class="btn btn-secondary text-light">Cancelar</a>
         </div>
     </form>
 </div>

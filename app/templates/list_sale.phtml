@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-12 text-center">
             <h1 class="text-center text-light">Lista de Inmuebles en Venta</h1>
-            <!-- Mostrar el formulario para agregar una nueva venta solo si el usuario es administrador -->
+            <!-- Muestra el formulario para agregar una nueva venta solo si el usuario es administrador -->
             <?php if (isset($_SESSION['ROL_VENDEDOR']) && $_SESSION['ROL_VENDEDOR'] === 'admin'): ?>
             <div class="col-md-6 mb-2">
                 <h4 class="text-light">Agregar Nueva Venta</h4>
@@ -22,19 +22,18 @@
                             <h5 class="mb-1">Inmueble: <?= $sale->inmueble ?></h5>
                             <p class="mb-1">Precio: $<?= $sale->precio ?></p>
                     </div>
-                            <div>
-                                <a href="<?= 'venta/' . $sale->id_venta ?>" class="btn btn-info btn-sm" role="button">
-                                    Ver Detalle
-                                </a>
+                    <div>
+                        <a href="<?= 'venta/' . $sale->id_venta ?>" class="btn btn-info btn-sm" role="button">
+                            Ver Detalle
+                        </a>
 
-                                <!-- Mostrar los botones Editar y Borrar solo si el usuario es administrador -->
-                                <?php if (isset($_SESSION['ROL_VENDEDOR']) && $_SESSION['ROL_VENDEDOR'] === 'admin'): ?>
-                                <a href="editar/<?= $sale->id_venta ?>" class="btn btn-warning btn-sm"
-                                    role="button">Editar</a>
-                                <a href="eliminar/<?= $sale->id_venta ?>" type="button"
-                                    class="btn btn-danger btn-sm ml-auto">Borrar</a>
-                                <?php endif; ?>
-                            </div>
+                        <!-- Muestra los botones Editar y Borrar solo si el usuario es administrador -->
+                        <?php if (isset($_SESSION['ROL_VENDEDOR']) && $_SESSION['ROL_VENDEDOR'] === 'admin'): ?>
+                        <a href="editar/<?= $sale->id_venta ?>" class="btn btn-warning btn-sm" role="button">Editar</a>
+                        <a href="eliminar/<?= $sale->id_venta ?>" type="button"
+                            class="btn btn-danger btn-sm ml-auto">Borrar</a>
+                        <?php endif; ?>
+                    </div>
                 </li>
                 <?php endforeach; ?>
             </ul>

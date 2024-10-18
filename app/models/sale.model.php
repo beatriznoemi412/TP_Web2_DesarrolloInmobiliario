@@ -21,11 +21,11 @@ class SaleModel {
                 throw new InvalidArgumentException("El ID proporcionado no es válido.");
             }
             
-            // Preparar y ejecutar la consulta
+            // Prepara y ejecuta la consulta
             $query = $this->db->prepare('SELECT * FROM venta WHERE id_venta = ?');
             $query->execute([$id]);   
     
-            // Obtener el resultado
+            // Obtiene el resultado
             $sale = $query->fetch(PDO::FETCH_OBJ);
         
             return $sale;
@@ -33,7 +33,7 @@ class SaleModel {
         } catch (Exception $e) {
             // Manejo de errores
             error_log($e->getMessage());
-            return null;  // o lo que sea apropiado en tu caso
+            return null; 
         }
     }
     
@@ -75,11 +75,11 @@ class SaleModel {
             
             $query = $this->db->prepare('UPDATE venta SET inmueble = ?, fecha_venta = ?, precio = ?, id_vendedor = ?, foto_url = ? WHERE id_venta = ?');
             
-            // Ejecutar la consulta con los parámetros
+            // Ejecuta la consulta con los parámetros
             return $query->execute([$inmueble, $date, $price, $id_vendedor, $image, $id]);
         } catch (PDOException $e) {
             error_log($e->getMessage()); // Log del error
             return false; // Retorna false en caso de error
         }
-  }
+    }
 }

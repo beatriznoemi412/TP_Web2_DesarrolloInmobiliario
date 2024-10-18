@@ -4,9 +4,9 @@
 <div class=" container d-flex justify-content-center align-items-center">
     <div class="row">
         <div class="col-12 text-center">
-        <?php if (isset($_SESSION['ROL_VENDEDOR']) && $_SESSION['ROL_VENDEDOR'] === 'admin'): ?>
-                <h4 class="text-light">Agregar Vendedor</h4>
-                <?php require_once 'app/templates/form_agregar_vendedor.phtml'; ?>
+            <?php if (isset($_SESSION['ROL_VENDEDOR']) && $_SESSION['ROL_VENDEDOR'] === 'admin'): ?>
+            <h4 class="text-light">Agregar Vendedor</h4>
+            <?php require_once 'app/templates/form_agregar_vendedor.phtml'; ?>
             <?php endif; ?>
             <h1 class="text-center text-light">Lista de Vendedores</h1>
             <p class="text-center text-light">Total de vendedores: <?= $count ?></p>
@@ -24,9 +24,10 @@
                     </a>
                     <div>
 
-                        <!-- Mostrar los botones Editar y Borrar solo si el usuario es administrador -->
+                        <!-- Muestra los botones Editar y Borrar solo si el usuario es administrador -->
                         <?php if (isset($_SESSION['ROL_VENDEDOR']) && $_SESSION['ROL_VENDEDOR'] === 'admin'): ?>
-                            <a href="editarVendedor/<?= $seller->id_vendedor ?>" type="button" class='btn btn-success btn-sm ml-auto'>Editar</a> 
+                        <a href="editarVendedor/<?= $seller->id_vendedor ?>" type="button"
+                            class='btn btn-success btn-sm ml-auto'>Editar</a>
                         <a href="eliminarVendedor/<?= $seller->id_vendedor ?>" type="button"
                             class="btn btn-danger btn-sm ml-auto">Borrar</a>
                         <?php endif; ?>
