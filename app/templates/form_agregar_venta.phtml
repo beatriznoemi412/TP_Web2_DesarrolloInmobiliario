@@ -7,24 +7,24 @@
     </div>
     <div>
         <label for="inmueble" class="form-label text-light">Inmueble</label>
-        <input type="text" name="inmueble" id="inmueble" class="form-control" required>
+        <input type="text" class="form-control" name="inmueble" id="inmueble" class="form-control" required>
     </div>
     <div>
         <label for="date" class="form-label text-light">Fecha</label>
-        <input type="date" name="date" id="date" class="form-control" required>
+        <input type="date" class="form-control" name="date" id="date" class="form-control" required>
     </div>
     <div>
         <label for="price" class="form-label text-light">Precio</label>
-        <input type="number" name="price" id="price" class="form-control" step="0.01" required>
+        <input type="number" class="form-control" name="price" id="price" class="form-control" step="0.01" required>
     </div>
 
     <label for="id_vendedor"></label>
-    <select id="id_vendedor" name="id_vendedor" required>
+    <select id="id_vendedor" name="id_vendedor" required class="form-control">
         <option value="">Selecciona un vendedor</option>
         <?php if (!empty($sellers)): ?>
         <?php foreach ($sellers as $seller): ?>
         <option value="<?= $seller->id_vendedor; ?>">
-            <?= $seller->Nombre . ' ' . $seller->Apellido; ?>
+            <?=$seller->id_vendedor . ' - ' . $seller->Nombre . ' ' . $seller->Apellido; ?>
         </option>
         <?php endforeach; ?>
         <?php endif; ?>

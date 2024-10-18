@@ -1,37 +1,37 @@
 <?php require_once 'app/templates/layout/header.phtml'; ?>
-<div class="container mt-5">
+<div class="container mt-2">
     <h1 class="text-center text-light">Editar Venta</h1>
     <form method="POST" action="editar/<?= htmlspecialchars($sale->id_venta) ?>">
         <!-- htmlsp..convierte caracteres especiales en sus equivalentes de entidades HTML.-->
-        <div class="mb-3">
+        <div class="mb-1">
             <label for="image" class="imagen form-label text-light">URL de la Foto</label>
             <input type="url" class="form-control" name="image" id="image"
                 value="<?= htmlspecialchars($sale->foto_url) ?>" placeholder="http://example.com/imagen.jpg">
         </div>
         <input type="hidden" name="id_venta" value="<?= htmlspecialchars($sale->id) ?>">
-        <div class="mb-3">
+        <div class="mb-1">
             <label for="inmueble" class="form-label text-light">Inmueble</label>
             <input type="text" class="form-control" name="inmueble" id="inmueble"
                 value="<?= htmlspecialchars($sale->inmueble) ?>" required>
         </div>
-        <div class="mb-3">
+        <div class="mb-1">
             <label for="date" class="form-label text-light">Fecha de Venta</label>
             <input type="date" class="form-control" name="date" id="date"
                 value="<?= htmlspecialchars($sale->fecha_venta) ?>" required>
         </div>
-        <div class="mb-3">
+        <div class="mb-1">
             <label for="price" class="form-label text-light">Precio</label>
             <input type="number" class="form-control" name="price" id="price"
                 value="<?= htmlspecialchars($sale->precio) ?>" required>
         </div>
         <label for="id_vendedor"></label>
-        <select id="id_vendedor" name="id_vendedor" required>
+        <select id="id_vendedor" name="id_vendedor" required class="form-control">
             <option value="">Selecciona un vendedor</option>
             <?php if (!empty($sellers)): ?>
             <?php foreach ($sellers as $seller): ?>
             <option value="<?= $seller->id_vendedor; ?>">
                 <?= (isset($sale) && $seller->id_vendedor == $sale->id_vendedor) ? 'selected' : ''; ?>>
-                <?= htmlspecialchars($seller->Nombre . ' ' . $seller->Apellido); ?>
+                <?= $seller->id_vendedor . ' - ' .$seller->Nombre . ' ' . $seller->Apellido; ?>
             </option>
             <?php endforeach; ?>
             <?php endif; ?>

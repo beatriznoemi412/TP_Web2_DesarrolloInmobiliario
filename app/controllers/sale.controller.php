@@ -181,12 +181,13 @@ public function editSale($id) {
             if (empty($_POST['inmueble']) || empty($_POST['date']) || empty($_POST['price']) || empty($_POST['id_vendedor']) || empty($_POST['image'])) {
                 return $this->view->showError('Todos los campos son obligatorios.');
             }
-
+           
             $inmueble = $_POST['inmueble'];
             $date = $_POST['date'];
             $price = $_POST['price'];
             $id_vendedor = $_POST['id_vendedor'];
             $image = $_POST['image'];
+           
             //Actualiza venta
             if ($this->model->updateSale($id, $inmueble, $date, $price, $id_vendedor, $image)) {
                 // Almacena el mensaje de éxito en la sesión

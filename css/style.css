@@ -55,6 +55,10 @@ header nav{
     height: auto;
 }
 /*form_editar y form_agregar_venta.phtml*/
+.container{
+    width: 60%;
+    height: auto;
+}
 .imagen{
     width: 50%;
     height: auto;
