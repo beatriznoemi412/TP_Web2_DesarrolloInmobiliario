@@ -176,7 +176,7 @@ public function editSale($id) {
         if (!$sale) {
             return $this->view->showError('Venta no encontrada.');
         }
-
+        //validacion del POST: comprueba si campos están vacíos
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST['inmueble']) || empty($_POST['date']) || empty($_POST['price']) || empty($_POST['id_vendedor']) || empty($_POST['image'])) {
                 return $this->view->showError('Todos los campos son obligatorios.');
@@ -187,7 +187,7 @@ public function editSale($id) {
             $price = $_POST['price'];
             $id_vendedor = $_POST['id_vendedor'];
             $image = $_POST['image'];
-            
+            //Actualiza venta
             if ($this->model->updateSale($id, $inmueble, $date, $price, $id_vendedor, $image)) {
                 // Almacena el mensaje de éxito en la sesión
                 $_SESSION['success_message'] = 'Venta actualizada con éxito.';

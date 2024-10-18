@@ -30,8 +30,7 @@
             <?php if (!empty($sellers)): ?>
             <?php foreach ($sellers as $seller): ?>
             <option value="<?= $seller->id_vendedor; ?>">
-                <?= (isset($inmueble) && $seller->id_vendedor == $inmueble->id_vendedor) ? 'selected' : ''; ?>>
-                <?= ($seller->id_vendedor == $sale->id_vendedor) ? 'seleccionado:' : ''; ?>
+                <?= (isset($sale) && $seller->id_vendedor == $sale->id_vendedor) ? 'selected' : ''; ?>>
                 <?= htmlspecialchars($seller->Nombre . ' ' . $seller->Apellido); ?>
             </option>
             <?php endforeach; ?>
