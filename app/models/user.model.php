@@ -22,7 +22,7 @@ class UserModel {
 
     public function getUserByUsername($usuario) {    
         $query = $this->db->prepare("SELECT * FROM vendedores WHERE usuario = ?");
-        $query->execute([$usuario]);
+        $query->execute([$usuario]);;//no ejecuta codigo malicioso
     
         $user = $query->fetch(PDO::FETCH_OBJ);
     
